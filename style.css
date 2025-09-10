@@ -1,0 +1,380 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600&display=swap');
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    height: 100%;
+    background: linear-gradient(135deg, #ffeef8 0%, #f8e8ff 30%, #e8f4ff 70%, #fff0f5 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Cute floating hearts and sparkles */
+body::before {
+    content: '💖 ✨ 🌸 💕 ⭐ 🦋 💖 ✨ 🌸 💕 ⭐ 🦋';
+    position: fixed;
+    top: -50px;
+    left: -50px;
+    width: calc(100% + 100px);
+    height: calc(100% + 100px);
+    font-size: 20px;
+    opacity: 0.1;
+    animation: sparkle 25s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at 15% 85%, rgba(255, 182, 193, 0.3) 0%, transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(221, 160, 221, 0.25) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(255, 240, 245, 0.2) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes sparkle {
+    0% { transform: translateX(-100px) translateY(-100px) rotate(0deg); }
+    100% { transform: translateX(100vw) translateY(100vh) rotate(360deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    33% { transform: translateY(-20px) scale(1.05); }
+    66% { transform: translateY(20px) scale(0.95); }
+}
+
+/* Main wrapper */
+.wrapper {
+    perspective: 1000px;
+}
+
+/* Calculator container */
+.calculator {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 240, 245, 0.8));
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 182, 193, 0.3);
+    border-radius: 30px;
+    padding: 35px;
+    box-shadow:
+        0 20px 40px rgba(255, 182, 193, 0.2),
+        0 10px 20px rgba(221, 160, 221, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        0 0 0 1px rgba(255, 192, 203, 0.2);
+    transform: rotateX(2deg) rotateY(-2deg);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+}
+
+.calculator::before {
+    content: '✨';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 24px;
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+.calculator:hover {
+    transform: rotateX(0deg) rotateY(0deg) scale(1.03);
+    box-shadow:
+        0 25px 50px rgba(255, 182, 193, 0.3),
+        0 15px 30px rgba(221, 160, 221, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+@keyframes twinkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+    50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+}
+
+/* Display screen */
+.display {
+    background: linear-gradient(145deg, #fff0f5, #ffeef8);
+    color: #d63384;
+    font-size: 2.8rem;
+    font-weight: 500;
+    text-align: right;
+    padding: 30px 25px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 182, 193, 0.4);
+    box-shadow:
+        inset 0 3px 15px rgba(255, 182, 193, 0.1),
+        0 5px 20px rgba(255, 182, 193, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.8);
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(214, 51, 132, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.display::after {
+    content: '💕';
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    font-size: 18px;
+    opacity: 0.6;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+.display:hover {
+    box-shadow:
+        inset 0 3px 15px rgba(255, 182, 193, 0.15),
+        0 8px 25px rgba(255, 182, 193, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Button grid */
+.buttons {
+    display: grid;
+    gap: 12px;
+}
+
+.buttons section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.buttons section:last-child {
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+/* Button styles */
+.btn {
+    background: linear-gradient(145deg, #ffffff, #ffeef8);
+    border: 2px solid rgba(255, 182, 193, 0.3);
+    border-radius: 18px;
+    color: #8b5a83;
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    padding: 22px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 6px 20px rgba(255, 182, 193, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 0 0 1px rgba(255, 240, 245, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Button hover effects */
+.btn:hover {
+    background: linear-gradient(145deg, #fff0f5, #ffeef8);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow:
+        0 10px 30px rgba(255, 182, 193, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 1),
+        0 0 20px rgba(255, 182, 193, 0.2);
+    border-color: rgba(255, 182, 193, 0.5);
+    color: #d63384;
+}
+
+.btn:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow:
+        0 4px 15px rgba(255, 182, 193, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Special button styles */
+.btn:nth-child(1), /* C button */
+.btn:nth-child(2)  /* Backspace button */ {
+    background: linear-gradient(145deg, #ffb3d9, #ff99cc);
+    border-color: rgba(255, 105, 180, 0.5);
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(255, 105, 180, 0.3);
+}
+
+.btn:nth-child(1):hover,
+.btn:nth-child(2):hover {
+    background: linear-gradient(145deg, #ff99cc, #ff80bf);
+    box-shadow:
+        0 10px 30px rgba(255, 105, 180, 0.3),
+        0 0 20px rgba(255, 105, 180, 0.4);
+    border-color: rgba(255, 105, 180, 0.7);
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Operator buttons */
+section:nth-child(1) .btn:nth-child(3),
+section:nth-child(2) .btn:nth-child(4),
+section:nth-child(3) .btn:nth-child(4),
+section:nth-child(4) .btn:nth-child(4) {
+    background: linear-gradient(145deg, #e6ccff, #d9b3ff);
+    border-color: rgba(186, 85, 211, 0.4);
+    color: #8b5a83;
+    font-weight: 700;
+}
+
+section:nth-child(1) .btn:nth-child(3):hover,
+section:nth-child(2) .btn:nth-child(4):hover,
+section:nth-child(3) .btn:nth-child(4):hover,
+section:nth-child(4) .btn:nth-child(4):hover {
+    background: linear-gradient(145deg, #d9b3ff, #cc99ff);
+    box-shadow:
+        0 10px 30px rgba(186, 85, 211, 0.25),
+        0 0 20px rgba(186, 85, 211, 0.3);
+    border-color: rgba(186, 85, 211, 0.6);
+    color: #663366;
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Equals button */
+section:last-child .btn:last-child {
+    background: linear-gradient(145deg, #ffb3e6, #ff99dd);
+    border-color: rgba(255, 20, 147, 0.5);
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(255, 20, 147, 0.3);
+    position: relative;
+}
+
+section:last-child .btn:last-child::before {
+    content: '💖';
+    position: absolute;
+    top: 5px;
+    right: 8px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+section:last-child .btn:last-child:hover {
+    background: linear-gradient(145deg, #ff99dd, #ff80d4);
+    box-shadow:
+        0 10px 30px rgba(255, 20, 147, 0.3),
+        0 0 25px rgba(255, 20, 147, 0.4);
+    border-color: rgba(255, 20, 147, 0.7);
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Zero button (spans 2 columns) */
+section:last-child .btn:first-child {
+    grid-column: span 2;
+    position: relative;
+}
+
+section:last-child .btn:first-child::after {
+    content: '🌸';
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    font-size: 16px;
+    opacity: 0.7;
+}
+
+/* Sparkle effect on button press */
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.6), rgba(255, 240, 245, 0.3));
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    z-index: 0;
+}
+
+.btn:active::before {
+    width: 120px;
+    height: 120px;
+}
+
+/* Add cute decorative elements */
+.btn:nth-child(5)::after { content: '🦋'; position: absolute; top: 5px; right: 8px; font-size: 12px; opacity: 0.6; }
+.btn:nth-child(9)::after { content: '✨'; position: absolute; top: 5px; right: 8px; font-size: 12px; opacity: 0.6; }
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .calculator {
+        padding: 25px;
+        margin: 15px;
+    }
+
+    .display {
+        font-size: 2.2rem;
+        padding: 25px 20px;
+    }
+
+    .btn {
+        padding: 18px;
+        font-size: 1.2rem;
+    }
+
+    body::before {
+        font-size: 16px;
+    }
+}
+
+/* Accessibility improvements */
+.btn:focus {
+    outline: 3px solid rgba(255, 182, 193, 0.8);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add a subtle title */
+.calculator::after {
+    content: 'Cute Calculator 💕';
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #d63384;
+    text-shadow: 0 2px 4px rgba(214, 51, 132, 0.2);
+    opacity: 0.8;
+}
