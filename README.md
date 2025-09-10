@@ -18,9 +18,6 @@ A beautiful, girly-themed calculator with a soft pastel design and cute animatio
 - Elegant typography with Poppins and Dancing Script fonts
 - Heartbeat animations and sparkle effects
 
-## 🚀 Live Demo
-
-[View Live Calculator](https://rjabwaad.github.io/cute-calculator/)
 
 ## 💻 Technologies Used
 
